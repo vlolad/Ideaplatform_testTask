@@ -6,15 +6,13 @@ import com.google.gson.stream.JsonReader;
 import org.apache.commons.io.FileUtils;
 import ru.ideaplatform.app.mapper.TicketMapper;
 import ru.ideaplatform.app.model.Ticket;
-import ru.ideaplatform.app.model.TicketData;
 import ru.ideaplatform.app.model.TicketsList;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,12 +24,12 @@ public class TicketsParser {
 
     public List<Ticket> parseTickets(String fileName) {
         TicketsList tickets = new TicketsList();
-
+        //Чтение файла и парсинг с помощью Gson
         try {
-            InputStream in2 = getClass().getClassLoader().getResourceAsStream(fileName);
-            System.out.println(new String(in2.readAllBytes(), StandardCharsets.UTF_8));
-
             InputStream in = getClass().getClassLoader().getResourceAsStream(fileName);
+            if (in == null) {
+                throw new FileNotFoundException("Problem with read file.");
+            }
             File file = File.createTempFile("temp", null);
             FileUtils.copyInputStreamToFile(in, file);
             JsonReader reader = new JsonReader(new FileReader(file));

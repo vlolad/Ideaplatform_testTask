@@ -12,7 +12,7 @@ public class MainApp {
         //Парсинг значений из json
         TicketsParser parser = new TicketsParser();
         List<Ticket> tickets = parser.parseTickets("tickets.json");
-        //Расчет необходимых показателей
+        //Расчет необходимых показателей, с user-friendly выводом
         Calculator calculator = new Calculator();
         calculator.averageFlyTime(tickets);
         calculator.calculatePercentile(tickets, 90);

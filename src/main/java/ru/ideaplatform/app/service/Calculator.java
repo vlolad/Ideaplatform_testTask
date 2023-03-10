@@ -12,6 +12,7 @@ import java.util.List;
 
 public class Calculator {
 
+    //Расчет среднего времени полета среди полученных билетов
     public void averageFlyTime(List<Ticket> data) {
         int count = 0;
         Duration time = Duration.ZERO;
@@ -26,6 +27,7 @@ public class Calculator {
                 .format(Instant.ofEpochMilli(avgTime)));
     }
 
+    //Расчет требуемого перцентиля среди полученных билетов
     public void calculatePercentile(List<Ticket> data, double percentile) {
         List<Long> values = new ArrayList<>();
         for (Ticket ticket : data) {
